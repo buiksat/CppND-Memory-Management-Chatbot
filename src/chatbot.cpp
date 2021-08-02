@@ -74,10 +74,6 @@ ChatBot& ChatBot::operator=(ChatBot&& other){
     _image = other._image;
     _rootNode = other._rootNode;
     _chatLogic = other._chatLogic;
-    if(other._image != NULL) {
-        delete other._image;
-        other._image = NULL;
-    }
     return *this;
 }
 
@@ -131,7 +127,9 @@ void ChatBot::SetCurrentNode(GraphNode *node)
     std::uniform_int_distribution<int> dis(0, answers.size() - 1);
     std::string answer = answers.at(dis(generator));
 
+
     // send selected node answer to user
+    _chatLogic->SetChatbotHandle(this);
     _chatLogic->SendMessageToUser(answer);
 }
 
