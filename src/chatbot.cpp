@@ -65,9 +65,9 @@ ChatBot::ChatBot(ChatBot&& other){
         other._image = NULL;
     }
 }
-ChatBot& ChatBot::operator=(const ChatBot& other){
+ChatBot& ChatBot::operator=(ChatBot *other){
     std::cout << "ChatBot Copy Assignment" << std::endl;
-    return *this = ChatBot(other);
+    return *this = ChatBot(*other);
 }
 ChatBot& ChatBot::operator=(ChatBot&& other){
     std::cout << "ChatBot Move Assignment" << std::endl;

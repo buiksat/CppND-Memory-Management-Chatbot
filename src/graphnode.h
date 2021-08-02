@@ -22,7 +22,7 @@ private:
 
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes
-    ChatBot *_chatBot;
+    ChatBot _chatBot;
 
     ////
     //// EOF STUDENT CODE
@@ -33,11 +33,11 @@ private:
 
 public:
     // constructor / destructor
-    GraphNode(int id);
+    explicit GraphNode(int id);
     ~GraphNode();
 
     // getter / setter
-    int GetID() { return _id; }
+    [[nodiscard]] int GetID() const { return _id; }
     int GetNumberOfChildEdges() { return _childEdges.size(); }
     GraphEdge* GetChildEdgeAtIndex(int index);
     std::vector<std::string> GetAnswers() { return _answers; }
@@ -51,7 +51,7 @@ public:
     //// STUDENT CODE
     ////
 
-    void MoveChatbotHere(ChatBot *chatbot);
+    void MoveChatbotHere(ChatBot chatbot);
 
     ////
     //// EOF STUDENT CODE
