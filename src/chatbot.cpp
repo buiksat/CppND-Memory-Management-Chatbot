@@ -58,22 +58,48 @@ ChatBot::ChatBot(ChatBot&& other){
     std::cout << "ChatBot Move Constructor" << std::endl;
     _chatLogic = other._chatLogic;
     _rootNode = other._rootNode;
+    if(_image != NULL) {
+        delete _image;
+        _image = NULL;
+    }
     _image = other._image;
-    // deallocate heap memory
     if(other._image != NULL) {
         delete other._image;
         other._image = NULL;
     }
+    other._chatLogic = nullptr;
+    other._rootNode = nullptr;
 }
-ChatBot& ChatBot::operator=(ChatBot *other){
+ChatBot& ChatBot::operator=(const ChatBot &other){
     std::cout << "ChatBot Copy Assignment" << std::endl;
-    return *this = ChatBot(*other);
+    if (this != &other) {
+        if(_image != NULL){
+            delete _image;
+            _image = NULL;
+        }
+        return *this = ChatBot(other);
+    } else {
+        return *this;
+    }
 }
 ChatBot& ChatBot::operator=(ChatBot&& other){
     std::cout << "ChatBot Move Assignment" << std::endl;
+    if (this == &other){
+        return *this;
+    }
+    if(_image != NULL){
+        delete _image;
+        _image = NULL;
+    }
     _image = other._image;
     _rootNode = other._rootNode;
     _chatLogic = other._chatLogic;
+    if(other._image != NULL){
+        delete other._image;
+        other._image = NULL;
+    }
+    other._rootNode = nullptr;
+    other._chatLogic = nullptr;
     return *this;
 }
 
